@@ -290,9 +290,11 @@ class SmallCNN(nn.Module):
             nn.Conv2d(64, 128, 3, padding=1), nn.ReLU(inplace=True),
             nn.MaxPool2d(2),  # /8
         )
+        # با این تغییر، همیشه قبل از Flatten به 3x3 اَداپتیو-پول می‌کنیم
         self.head = nn.Sequential(
+            nn.AdaptiveAvgPool2d((3, 3)),
             nn.Flatten(),
-            nn.Linear(128*4*4, out_dim),  # works for 32x32 (CIFAR, CMNIST 28~32); for 224x224 we will use a bigger encoder below.
+            nn.Linear(128*3*3, out_dim),
             nn.ReLU(inplace=True)
         )
         self.out_dim = out_dim
