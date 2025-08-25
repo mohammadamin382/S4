@@ -532,7 +532,7 @@ class S4System:
         self.sched_main = torch.optim.lr_scheduler.CosineAnnealingLR(self.opt_main, T_max=max(1,cfg.epochs))
         self.sched_probe = torch.optim.lr_scheduler.CosineAnnealingLR(self.opt_probe, T_max=max(1,cfg.epochs))
 
-        self.scaler = torch.cuda.amp.GradScaler(enabled=cfg.mixed_precision)
+        self.scaler = torch.amp.GradScaler('cuda', enabled=cfg.mixed_precision)
 
         # Logs
         self.history = []
