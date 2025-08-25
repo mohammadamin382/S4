@@ -177,7 +177,7 @@ class ColoredMNIST(Dataset):
     def __getitem__(self, idx):
         x, y = self.base[idx]
         x = self.transform(x)
-        label_parity = (y % 2).item()
+        label_parity = int(y) % 2
         if random.random() < self.rho:
             color = label_parity
         else:
